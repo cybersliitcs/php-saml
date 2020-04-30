@@ -719,8 +719,8 @@ class OneLogin_Saml2_LogoutRequestTest extends PHPUnit_Framework_TestCase
         );
 /*edit*/
            if(
-	isset( $_GET['SAMLRequest'])
-	&& wp_verify_nonce(sanitize_key($_GET['SAMLRequest']), 'SAMLRequest_action')
+	isset( $_GET['SAMLRequest']) && isset( $_GET['nonce']) 
+	&& wp_verify_nonce($_GET['nonce'], 'SAMLRequest_action')
     ){
     	$SAMLRequest = sanitize_key($_GET['SAMLRequest']);
     }
