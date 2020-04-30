@@ -13,29 +13,29 @@ $auth = new OneLogin_Saml2_Auth($settingsInfo);
 /*edit*/
 
 if(
-	isset( $_GET['sso'])
-	&& wp_verify_nonce($_GET['sso'], 'sso_action')
+	isset( $_GET['sso']) && isset($_GET['nonce'])
+	&& wp_verify_nonce($_GET['nonce'], 'sso_action')
   ){
   		$sso = $_GET['sso'];
   }
 
 if(
-	isset( $_GET['sso2'])
-	&& wp_verify_nonce($_GET['sso'], 'sso2_action')
+	isset( $_GET['sso2']) && isset($_GET['nonce1'])
+	&& wp_verify_nonce($_GET['nonce1'], 'sso2_action')
   ){
   		$sso2 = $_GET['sso'];
   }
 
 if(
-	isset( $_GET['slo'])
-	&& wp_verify_nonce($_GET['slo'], 'slo_action')
+	isset( $_GET['slo']) && isset($_GET['nonce2'])
+	&& wp_verify_nonce($_GET['nonce2'], 'slo_action')
   ){
   		$slo = $_GET['slo'];
   }
 
 if(
-	isset( $_GET['acs'])
-	&& wp_verify_nonce($_GET['acs'], 'acs_action')
+	isset( $_GET['acs']) && isset($_GET['nonce3'])
+	&& wp_verify_nonce($_GET['nonce3'], 'acs_action')
   ){
   		$acs =$_GET['acs'];
   }
