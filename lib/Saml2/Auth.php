@@ -261,7 +261,7 @@ class OneLogin_Saml2_Auth
        if (
         isset($_GET['SAMLResponse']) &&
         isset($_GET['nonce']) &&
-		wp_verify_nonce( sanitize_key( $_SERVER['nonce'] ), 'SAMLResponse'
+		wp_verify_nonce( $_SERVER['nonce'], 'SAMLResponse'
 )/*End edit*/{
             $logoutResponse = new OneLogin_Saml2_LogoutResponse($this->_settings, $_GET['SAMLResponse']);
             $this->_lastResponse = $logoutResponse->getXML();
@@ -343,10 +343,10 @@ class OneLogin_Saml2_Auth
         assert('is_array($parameters)');
 /*edit*/
       if(
-	isset( $_REQUEST['RelayState'])
-	&& wp_verify_nonce(sanitize_key($_REQUEST['RelayState']), 'RelayState_action')
+	isset( $_REQUEST['RelayState']) && isset( $_REQUEST['nonce'])
+	&& wp_verify_nonce($_REQUEST['nonce'], 'RelayState_action')
   ){
-  		$RelayState = sanitize_key($_REQUEST['RelayState']);
+  		$RelayState = $_REQUEST['RelayState'];
   }
 
         if (empty($url) && $RelayState) {
