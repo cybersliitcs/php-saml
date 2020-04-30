@@ -252,7 +252,7 @@ class XMLSecurityKey {
         }
 
         if (! empty($data)) {
-            return strtolower(sha1(base64_decode($data)));
+            return strtolower(sha512(base64_decode($data)));
         }
 
         return null;
