@@ -15,7 +15,7 @@ $auth->processResponse();
 $errors = $auth->getErrors();
 
 if (!empty($errors)) {
-    echo '<p>', implode(', ', $errors), '</p>';
+    echo '<p>', esc_attr(', ', $errors), '</p>';
     exit();
 }
 
@@ -42,12 +42,12 @@ if ($RelayState) && OneLogin_Saml2_Utils::getSelfURL() != $RelayState) {
 $attributes = $_SESSION['samlUserdata'];
 
 if (!empty($attributes)) {
-    echo '<h1>'._('User attributes:').'</h1>';
-    echo '<table><thead><th>'._('Name').'</th><th>'._('Values').'</th></thead><tbody>';
+    echo '<h1>'.esc_html('User attributes:').'</h1>';
+    echo '<table><thead><th>'.esc_html('Name').'</th><th>'.esc_html('Values').'</th></thead><tbody>';
     foreach ($attributes as $attributeName => $attributeValues) {
-        echo '<tr><td>'.htmlentities($attributeName).'</td><td><ul>';
+        echo '<tr><td>'.esc_attr($attributeName).'</td><td><ul>';
         foreach ($attributeValues as $attributeValue) {
-            echo '<li>'.htmlentities($attributeValue).'</li>';
+            echo '<li>'.esc_attr($attributeValue).'</li>';
         }
         echo '</ul></td></tr>';
     }

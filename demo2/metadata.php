@@ -14,4 +14,4 @@ $samlSettings = new OneLogin_Saml2_Settings();
 $sp = $samlSettings->getSPData();
 
 $samlMetadata = OneLogin_Saml2_Metadata::builder($sp);
-echo $samlMetadata;
+echo esc_attr($samlMetadata);

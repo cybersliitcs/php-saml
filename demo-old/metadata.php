@@ -12,4 +12,4 @@ require 'settings.php';
 header('Content-Type: text/xml');
 
 $samlMetadata = new OneLogin_Saml_Metadata($settings);
-echo $samlMetadata->getXml();
+echo esc_attr($samlMetadata)->getXml();
