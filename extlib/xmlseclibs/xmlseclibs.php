@@ -306,7 +306,7 @@ class XMLSecurityKey {
         if ($this->cryptParams['mode'] == MCRYPT_MODE_CBC) {
             $bs = mcrypt_enc_get_block_size($td);
             for ($datalen0=$datalen=strlen($data); (($datalen%$bs)!=($bs-1)); $datalen++)
-                $data.=chr(mt_rand(1, 127));
+                $data.=chr(random_bytes(1, 127));
             $data.=chr($datalen-$datalen0+1);
         }
         $encrypted_data = $this->iv.mcrypt_generic($td, $data);
