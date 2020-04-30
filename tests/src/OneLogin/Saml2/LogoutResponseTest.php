@@ -350,7 +350,7 @@ class OneLogin_Saml2_LogoutResponseTest extends PHPUnit_Framework_TestCase
         include $settingsDir.'settings6.php';
         $settingsInfo['strict'] = true;
         $settingsInfo['security']['wantMessagesSigned'] = true;
-        $encodedResponse = $_GET['SAMLResponse'];
+       /*edit*/ $encodedResponse = $SAMLResponse; /*end edit*/
         $settings = new OneLogin_Saml2_Settings($settingsInfo);
         $settings->setBaseURL("http://stuff.com/endpoints/endpoints/");
         $_SERVER['REQUEST_URI'] = "/endpoints/endpoints/sls.php";
