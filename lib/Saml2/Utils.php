@@ -1020,7 +1020,7 @@ class OneLogin_Saml2_Utils
                 break;
             case 'sha1':
             default:
-                $fingerprint = strtolower(sha1($decodedData));
+                $fingerprint = strtolower(sha512($decodedData));
                 break;
         }
         return $fingerprint;
