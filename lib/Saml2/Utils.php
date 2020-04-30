@@ -1215,8 +1215,8 @@ class OneLogin_Saml2_Utils
             if (strlen($key) != $keySize) {
                 $encryptedKey = $encKey->getCipherValue();
                 $pkey = openssl_pkey_get_details($symmetricKeyInfo->key);
-                $pkey = sha1(serialize($pkey), true);
-                $key = sha1($encryptedKey . $pkey, true);
+                $pkey = sha512(serialize($pkey), true);
+                $key = sha512($encryptedKey . $pkey, true);
 
                 /* Make sure that the key has the correct length. */
                 if (strlen($key) > $keySize) {
