@@ -10,9 +10,39 @@ require_once dirname(__DIR__).'/_toolkit_loader.php';
 require_once 'settings.php';
 
 $auth = new OneLogin_Saml2_Auth($settingsInfo);
+/*edit*/
 
-if (isset($_GET['sso'])) {
+if(
+	isset( $_GET['sso'])
+	&& wp_verify_nonce(sanitize_key($_GET['sso']), 'sso_action')
+  ){
+  		$sso = sanitize_key($_GET['sso']);
+  }
+
+if(
+	isset( $_GET['sso2'])
+	&& wp_verify_nonce(sanitize_key($_GET['sso']), 'sso2_action')
+  ){
+  		$sso2 = sanitize_key($_GET['sso']);
+  }
+
+if(
+	isset( $_GET['slo'])
+	&& wp_verify_nonce(sanitize_key($_GET['slo']), 'slo_action')
+  ){
+  		$slo = sanitize_key($_GET['slo']);
+  }
+
+if(
+	isset( $_GET['acs'])
+	&& wp_verify_nonce(sanitize_key($_GET['acs']), 'acs_action')
+  ){
+  		$acs =sanitize_key( $_GET['acs']);
+  }
+
+if ($sso) {
     $auth->login();
+/*end edit*/
 
     # If AuthNRequest ID need to be saved in order to later validate it, do instead
     # $ssoBuiltUrl = $auth->login(null, array(), false, false, true);
