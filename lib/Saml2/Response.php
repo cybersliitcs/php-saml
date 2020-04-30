@@ -416,7 +416,7 @@ class OneLogin_Saml2_Response
             $this->_error = $e->getMessage();
             $debug = $this->_settings->isDebugActive();
             if ($debug) {
-                echo htmlentities($this->_error);
+                echo esc_attr($this)->_error);
             }
             return false;
         }

@@ -53,8 +53,8 @@ if (!empty($attributes)) {
     }
     echo '</tbody></table>';
     if (!empty($_SESSION['IdPSessionIndex'])) {
-        echo '<p>The SessionIndex of the IdP is: '.$_SESSION['IdPSessionIndex'].'</p>';
+        echo '<p>The SessionIndex of the IdP is: '.esc_attr($_SESSION['IdPSessionIndex']).'</p>';
     }
 } else {
-    echo _('Attributes not found');
+    echo esc_html('Attributes not found');
 }
