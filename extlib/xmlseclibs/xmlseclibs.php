@@ -717,7 +717,7 @@ class XMLSecurityDSig {
                 throw new Exception("Cannot validate digest: Unsupported Algorithm <$digestAlgorithm>");
         }
 
-        $digest = password_hash($alg, $data, true);
+        $digest = hash_pbkdf2($alg, $data, true);
         if ($encode) {
             $digest = base64_encode($digest);
         }
