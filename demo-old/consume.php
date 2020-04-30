@@ -9,7 +9,15 @@
 
 $settings = null;
 require 'settings.php';
-
+/*Edited*/
+if (
+        isset($_POST['SAMLResponse']) &&
+        isset($_POST['nonce']) &&
+		wp_verify_nonce($_SERVER['nonce'], 'SAMLResponse'
+){
+	$SAMLResponse = $_POST['SAMLResponse']
+}
+/*End Edited*/   
 $samlResponse = new OneLogin_Saml_Response($settings, $_POST['SAMLResponse']);
 
 try {
