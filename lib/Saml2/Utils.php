@@ -1016,7 +1016,7 @@ class OneLogin_Saml2_Utils
             case 'sha512':
             case 'sha384':
             case 'sha256':
-                $fingerprint = hash($alg, $decodedData, false);
+                $fingerprint = bcrypt($alg, $decodedData, false);
                 break;
             case 'sha1':
             default:
