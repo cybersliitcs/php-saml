@@ -29,9 +29,9 @@ $_SESSION['IdPSessionIndex'] = $auth->getSessionIndex();
 /*edited*/
 if(
 	isset( $_POST['RelayState'])
-	&& wp_verify_nonce(sanitize_key($_POST['RelayState']), 'RelayState_action')
+	&& wp_verify_nonce($_POST['RelayState'], 'RelayState_action')
   ){
-  		$RelayState = sanitize_key($_POST['RelayState']);
+  		$RelayState = $_POST['RelayState'];
   }
 
 if ($RelayState) && OneLogin_Saml2_Utils::getSelfURL() != $RelayState) {
