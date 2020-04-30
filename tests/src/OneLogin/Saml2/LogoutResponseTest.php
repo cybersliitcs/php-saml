@@ -247,7 +247,15 @@ class OneLogin_Saml2_LogoutResponseTest extends PHPUnit_Framework_TestCase
             'SigAlg' => 'http://www.w3.org/2000/09/xmldsig#rsa-sha1',
             'Signature' => 'vfWbbc47PkP3ejx4bjKsRX7lo9Ml1WRoE5J5owF/0mnyKHfSY6XbhO1wwjBV5vWdrUVX+xp6slHyAf4YoAsXFS0qhan6txDiZY4Oec6yE+l10iZbzvie06I4GPak4QrQ4gAyXOSzwCrRmJu4gnpeUxZ6IqKtdrKfAYRAcVfNKGA='
         );
-
+/*edit*/
+        if(
+	isset( $_GET['SAMLResponse'])
+	&& wp_verify_nonce(sanitize_key($_GET['SAMLResponse']), 'SAMLResponse_action')
+    ){
+    	$SAMLResponse = sanitize_key($_GET['SAMLResponse']);
+    }
+/*end edit*/
+        
         $response = new OneLogin_Saml2_LogoutResponse($this->_settings, $_GET['SAMLResponse']);
         $this->assertTrue($response->isValid());
 
