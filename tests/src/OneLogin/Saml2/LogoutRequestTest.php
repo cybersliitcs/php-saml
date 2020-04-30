@@ -717,7 +717,14 @@ class OneLogin_Saml2_LogoutRequestTest extends PHPUnit_Framework_TestCase
             'SigAlg' => 'http://www.w3.org/2000/09/xmldsig#rsa-sha1',
             'Signature' => 'XCwCyI5cs7WhiJlB5ktSlWxSBxv+6q2xT3c8L7dLV6NQG9LHWhN7gf8qNsahSXfCzA0Ey9dp5BQ0EdRvAk2DIzKmJY6e3hvAIEp1zglHNjzkgcQmZCcrkK9Czi2Y1WkjOwR/WgUTUWsGJAVqVvlRZuS3zk3nxMrLH6f7toyvuJc='
         );
-
+/*edit*/
+           if(
+	isset( $_GET['SAMLRequest'])
+	&& wp_verify_nonce(sanitize_key($_GET['SAMLRequest']), 'SAMLRequest_action')
+    ){
+    	$SAMLRequest = sanitize_key($_GET['SAMLRequest']);
+    }
+/*end edit*/
         $request = gzinflate(base64_decode($_GET['SAMLRequest']));
         $encodedRequest = $_GET['SAMLRequest'];
 
