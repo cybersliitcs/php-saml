@@ -26,19 +26,9 @@ if (!$auth->isAuthenticated()) {
 
 $_SESSION['samlUserdata'] = $auth->getAttributes();
 $_SESSION['IdPSessionIndex'] = $auth->getSessionIndex();
-/*edited*/
-if(
-	isset( $_POST['RelayState']) && isset( $_POST['nonce'])
-	&& wp_verify_nonce($_POST['nonce'], 'RelayState_action')
-  ){
-  		$RelayState = $_POST['RelayState'];
-  }
-
-if ($RelayState) && OneLogin_Saml2_Utils::getSelfURL() != $RelayState) {
-    $auth->redirectTo($RelayState);
+if (isset($_POST['RelayState']) && OneLogin_Saml2_Utils::getSelfURL() != $_POST['RelayState']) {
+    $auth->redirectTo($_POST['RelayState']);
 }
-/*end edit*/
-
 $attributes = $_SESSION['samlUserdata'];
 
 if (!empty($attributes)) {
