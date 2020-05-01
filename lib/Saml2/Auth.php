@@ -204,12 +204,7 @@ class OneLogin_Saml2_Auth
     {
         $this->_errors = array();
         $this->_errorReason = null;
-        /*edit*/
-        if (
-        isset($_POST['SAMLResponse']) &&
-        isset($_POST['nonce']) &&
-		wp_verify_nonce( isset( $_SERVER['nonce'] ), 'SAMLResponse'
-        )) /*end edit*/ {
+         if (isset($_POST['SAMLResponse'])) {
             // AuthnResponse -- HTTP_POST Binding
             $response = new OneLogin_Saml2_Response($this->_settings, $_POST['SAMLResponse']);
             $this->_lastResponse = $response->getXMLDocument();
@@ -257,12 +252,7 @@ class OneLogin_Saml2_Auth
     {
         $this->_errors = array();
         $this->_errorReason = null;
-        /*edit*/
-       if (
-        isset($_GET['SAMLResponse']) &&
-        isset($_GET['nonce']) &&
-		wp_verify_nonce( $_SERVER['nonce'], 'SAMLResponse'
-)/*End edit*/{
+     if (isset($_GET['SAMLResponse'])) {
             $logoutResponse = new OneLogin_Saml2_LogoutResponse($this->_settings, $_GET['SAMLResponse']);
             $this->_lastResponse = $logoutResponse->getXML();
             if (!$logoutResponse->isValid($requestId, $retrieveParametersFromServer)) {
@@ -341,21 +331,13 @@ class OneLogin_Saml2_Auth
     {
         assert('is_string($url)');
         assert('is_array($parameters)');
-/*edit*/
-      if(
-	isset( $_REQUEST['RelayState']) && isset( $_REQUEST['nonce'])
-	&& wp_verify_nonce($_REQUEST['nonce'], 'RelayState_action')
-  ){
-  		$RelayState = $_REQUEST['RelayState'];
-  }
 
-        if (empty($url) && $RelayState) {
-            $url = $RelayState;
+	if (empty($url) && isset($_REQUEST['RelayState'])) {
+            $url = $_REQUEST['RelayState'];
         }
 
         return OneLogin_Saml2_Utils::redirect($url, $parameters, $stay);
     }
-           /*end edit*/
 
     /**
      * Checks if the user is authenticated or not.
