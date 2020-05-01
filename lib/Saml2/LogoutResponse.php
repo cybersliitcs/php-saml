@@ -191,7 +191,11 @@ class OneLogin_Saml2_LogoutResponse
                     );
                 }
             }
- 	if (isset($_GET['Signature'])){
+ 	/*edit*/
+           if(
+  isset( $_POST['SAMLResponse']) && isset( $_POST['nonce'])
+  && wp_verify_nonce($_POST['SAMLResponse'], 'SAMLResponse_action')
+  ) /*end edit*/{
                 $signatureValid = OneLogin_Saml2_Utils::validateBinarySign("SAMLResponse", $_GET, $idpData, $retrieveParametersFromServer);
                 if (!$signatureValid) {
                     throw new OneLogin_Saml2_ValidationError(
