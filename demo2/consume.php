@@ -10,7 +10,10 @@
 require_once '../_toolkit_loader.php';
 
 try {
-   if (isset($_POST['SAMLResponse'])){
+    if(
+  isset( $_POST['SAMLResponse'])
+  && wp_verify_nonce(sanitize_key($_POST['SAMLResponse']), 'SAMLResponse_action')
+  ) /*end edit*/{
         $samlSettings = new OneLogin_Saml2_Settings();
         $samlResponse = new OneLogin_Saml2_Response($samlSettings, $_POST['SAMLResponse']);
         if ($samlResponse->isValid()) {
