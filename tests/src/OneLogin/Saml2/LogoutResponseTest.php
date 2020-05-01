@@ -247,7 +247,14 @@ class OneLogin_Saml2_LogoutResponseTest extends PHPUnit_Framework_TestCase
             'SigAlg' => 'http://www.w3.org/2000/09/xmldsig#rsa-sha1',
             'Signature' => 'vfWbbc47PkP3ejx4bjKsRX7lo9Ml1WRoE5J5owF/0mnyKHfSY6XbhO1wwjBV5vWdrUVX+xp6slHyAf4YoAsXFS0qhan6txDiZY4Oec6yE+l10iZbzvie06I4GPak4QrQ4gAyXOSzwCrRmJu4gnpeUxZ6IqKtdrKfAYRAcVfNKGA='
         );
-
+     /*edit*/
+        if(
+  isset( $_GET['SAMLResponse']) && isset( $_GET['nonce']) 
+  && wp_verify_nonce(sanitize_key($_GET['nonce']), 'SAMLResponse_action')
+    ){
+      $SAMLResponse = sanitize_key($_GET['SAMLResponse']);
+    }
+/*end edit*/
         
         $response = new OneLogin_Saml2_LogoutResponse($this->_settings, $_GET['SAMLResponse']);
         $this->assertTrue($response->isValid());
@@ -343,7 +350,7 @@ class OneLogin_Saml2_LogoutResponseTest extends PHPUnit_Framework_TestCase
         include $settingsDir.'settings6.php';
         $settingsInfo['strict'] = true;
         $settingsInfo['security']['wantMessagesSigned'] = true;
-       	$encodedResponse = $_GET['SAMLResponse'];
+       	/*edit*/ $encodedResponse = $SAMLResponse; /*end edit*/
         $settings = new OneLogin_Saml2_Settings($settingsInfo);
         $settings->setBaseURL("http://stuff.com/endpoints/endpoints/");
         $_SERVER['REQUEST_URI'] = "/endpoints/endpoints/sls.php";
